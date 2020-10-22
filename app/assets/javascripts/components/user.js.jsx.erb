@@ -1,0 +1,20 @@
+var User = React.createClass({
+	getInitialState() {
+    return {
+      user: this.props.user
+    }
+  },
+	
+	render() {
+    return (
+      <tr>
+        <td>{this.state.user.name}</td>
+        <td>{this.state.user.email}</td>
+        <td>
+					<a href={"/users" + "/" + this.state.user.id +"/edit"} className="btn btn-primary btn-xs" style={{marginRight: 5 + 'px'}} >Editar</a>
+          <a href={"/users" + "/" + this.state.user.id} className="btn btn-primary btn-xs" data-method="delete" rel="nofollow" data-confirm="Seguro que quieres eliminar este usuario">Eliminar</a>
+        </td>
+      </tr>
+    );
+  }
+});

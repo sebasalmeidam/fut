@@ -1,0 +1,82 @@
+<%= form_for @sale, url: {controller: "sales", action: "create", player_id: @player.id }, html: {class: "form-horizontal"}, remote: true do |f| %>
+	<div class="modal-body">
+		<%= f.hidden_field :player_id, value: @player.id %>
+
+		<div class="form-group">
+			<%= f.label :sell_in, "Vendido en:", class: "col-xs-4 control-label" %>
+			<div class="col-xs-7">
+				<%= f.text_field :sell_in, data: {autonumeric: {mDec: 0}}, class: "form-control" %>
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<%= f.label :afterTax, "Recibido:", class: "col-xs-4 control-label" %>
+			<div class="col-xs-7">
+				<%= f.text_field :afterTax, data: {autonumeric: {mDec: 0}}, class: "form-control" %>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<%= f.label :pMargin, "Utilidad %: (5% = 5)", class: "col-xs-4 control-label" %>
+			<div class="col-xs-7">
+				<%= f.text_field :pMargin, value: (if @sale.new_record? then 0 else @sale.pMargin.to_i end), data: {autonumeric: {mDec: 0}}, class: "form-control" %>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<%= f.label :buy_in, "Comprar en: ", class: "col-xs-4 control-label" %>
+			<div class="col-xs-7">
+				<%= f.text_field :buy_in, data: {autonumeric: {mDec: 0}}, class: "form-control" %>
+			</div>
+		</div>
+	
+		<div class="form-group">
+			<%= f.label :nMargin, "Utilidad neta:", class: "col-xs-4 control-label" %>
+			<div class="col-xs-7">
+				<%= f.text_field :nMargin, data: {autonumeric: {mDec: 0}}, class: "form-control" %>
+			</div>
+		</div>
+	</div>
+
+		
+
+<div class="modal-footer">
+	<%= f.submit @sale.new_record? ? "Crear" : "Editar" , :class => 'btn btn-default', id: "close-modal" %>
+	<button class="btn btn-danger" 	data-dismiss="modal" aria-hidden="true">Cerrar</button>
+</div>
+<% end %>
+
+<script>
+
+$(document).on('turbolinks:load', function() {
+	$("#sale_sell_in").bind("change paste keyup", function() {
+		quantity = $("#sale_sell_in").val();
+		total = parseInt(quantity.replace(",","")) * 0.95
+		$("#sale_afterTax").val(Math.round(total));
+	});
+
+	$("#sale_pMargin").bind("change paste keyup", function() {
+		quantity = $("#sale_afterTax").val();
+		margin = $("#sale_pMargin").val();
+		total = quantity.replace(",","")/(1+margin/100);
+		$("#sale_buy_in").val(Math.round(total));
+		total2 = quantity.replace(",","") - total
+		$("#sale_nMargin").val(Math.round(total2))
+	});
+
+	$('#new_sale').submit(function() {
+		$("#sale_afterTax").focus();
+	});
+
+
+	$("#close-modal").click( function(){
+		if($("#sale_nMargin") != "") {
+			$("#sale_nMargin").focus();
+			$("#sale_afterTax").focus();
+			$("#sale_buy_in").focus();
+		}
+		$("#modal-window").modal("toggle")
+	});
+});
+
+</script>

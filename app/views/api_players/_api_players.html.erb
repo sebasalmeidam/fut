@@ -1,0 +1,78 @@
+<%= hidden_field_tag :direction, params[:direction] if params[:direction] %>
+<%= hidden_field_tag :column, params[:column] %>
+<%= hidden_field_tag :filter, params[:filter] %>
+<div class="table-responsive">
+	<table class="table table-condensed">
+		<thead>
+			<tr>
+				<th>Jugador </th>
+				<th> </th>
+				<th>Info </th>
+				<th>Posición</th>
+				<th><%= sort_link('rating', 'Rating') %></th>
+				<th><%= sort_link('attr_1_val', 'PAC') %></th>
+				<th><%= sort_link('attr_2_val', 'SHO' ) %></th>
+				<th><%= sort_link('attr_3_val', 'PAS' ) %></th>
+				<th><%= sort_link('attr_4_val', 'DRI' ) %></th>
+				<th><%= sort_link('attr_5_val', 'DEF' ) %></th>
+				<th><%= sort_link('attr_6_val', 'PHY' ) %></th>
+				<th><%= sort_link('skillMoves', 'Skills' ) %></th>
+				<th><%= sort_link('weakFoot', 'Weak F' ) %></th>
+				<th>Foot</th>
+				<th align="center">Att / Def </th>
+				
+
+			</tr>
+		</thead>
+		<tbody>
+		<% @players.each do |player| %>
+			<tr>
+				<td><%= !player.special_img_small.nil? ? image_tag(player.special_img_small, size: '40x40') : image_tag(player.headshot_img_small) %></td>
+				<td>
+					<%= link_to(	(player.commonName != "" ? player.commonName : "#{player.firstName} #{player.lastName}"), fifa17_path(player))  %> <br>
+				</td>
+				<td>
+					<%= image_tag(player.nation_img_small) %>
+					<%= image_tag(player.club_img_small) %> <br>
+					<%= player.color.gsub('_', ' ') %>
+				</td>
+				<td><%= player.position %></td>
+				<td><%= player.rating %></td>
+				<td><%= player.attr_1_val %></td>
+				<td><%= player.attr_2_val %></td>
+				<td><%= player.attr_3_val %></td>
+				<td><%= player.attr_4_val %></td>
+				<td><%= player.attr_5_val %></td>
+				<td><%= player.attr_6_val %></td>
+				<td>
+					<% sk = player.skillMoves %>
+					<% if sk.to_i > 1 %>
+						<% (1..sk.to_i).to_a.each do |i| %>
+							<%= content_tag(:span, '', class: "fa fa-star yellow #{i}" ) %>
+						<% end %>
+					<% else %>
+							<%= content_tag(:span, '', class: "fa fa-star yellow" ) %>
+					<% end %>					
+				</td>
+				<td><% wf = player.weakFoot %>
+					<% if wf.to_i > 1 %>
+						<% (1..wf.to_i).to_a.each do |i| %>
+							<%= content_tag(:span, '', class: "fa fa-star yellow #{i}" ) %>
+						<% end %>
+					<% else %>
+							<%= content_tag(:span, '', class: "fa fa-star yellow" ) %>
+					<% end %>
+				</td>
+				<td><%= player.foot %></td>
+				<td><%= player.atkWorkRate %>/<%= player.defWorkRate %></td>
+			
+			</tr>
+		<% end %>
+		</tbody>
+		
+	</table>
+</div>
+
+<div class="pagination">
+	<%= will_paginate @players, renderer: BootstrapPagination::Rails %>
+</div>

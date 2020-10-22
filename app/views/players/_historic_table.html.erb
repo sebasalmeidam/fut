@@ -1,0 +1,82 @@
+<table class="table table-condensed">
+	<thead>
+		<tr>
+			<th>Histórico</th>
+			<th>Hoy</th>
+			<th>Ayer</th>
+			<th>Hace 2 días</th>
+			<th>Hace 3 días</th>
+			<th>Última Semana</th>
+			<th>Último mes</th>
+			<th>Histórico</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<th>Mínimo</th>
+			<td> <%= !today_prices.empty? ? number_with_delimiter((today_prices.min).round(0), delimiter: ",") : 0 %></td>
+			<td> <%= !yesterday_prices.empty? ? number_with_delimiter((yesterday_prices.min).round(0), delimiter: ",") : 0 %></td>
+			<td> <%= !last_2d_prices.empty? ? number_with_delimiter((last_2d_prices.min).round(0), delimiter: ",") : 0 %></td>
+			<td> <%= !last_3d_prices.empty? ? number_with_delimiter((last_3d_prices.min).round(0), delimiter: ",") : 0 %></td>
+			<td> <%= !last_week_prices.empty? ? number_with_delimiter((last_week_prices.min).round(0), delimiter: ",") : 0 %></td>
+			<td> <%= !last_month_prices.empty? ? number_with_delimiter((last_month_prices.min).round(0), delimiter: ",") : 0 %></td>
+			<td> <%= !historic_prices.empty? ? number_with_delimiter((historic_prices.min).round(0), delimiter: ",") : 0 %></td>
+		</tr>
+		<tr>
+			<th>Máximo</th>
+			<td> <%= !today_prices.empty? ? number_with_delimiter((today_prices.max).round(0), delimiter: ",") : 0 %></td>
+			<td> <%= !yesterday_prices.empty? ? number_with_delimiter((yesterday_prices.max).round(0), delimiter: ",") : 0 %></td>
+			<td> <%= !last_2d_prices.empty? ? number_with_delimiter((last_2d_prices.max).round(0), delimiter: ",") : 0 %></td>
+			<td> <%= !last_3d_prices.empty? ? number_with_delimiter((last_3d_prices.max).round(0), delimiter: ",") : 0 %></td>
+			<td> <%= !last_week_prices.empty? ? number_with_delimiter((last_week_prices.max).round(0), delimiter: ",") : 0 %></td>
+			<td> <%= !last_month_prices.empty? ? number_with_delimiter((last_month_prices.max).round(0), delimiter: ",") : 0 %></td>
+			<td> <%= !historic_prices.empty? ? number_with_delimiter((historic_prices.max).round(0), delimiter: ",") : 0 %></td>
+		</tr>
+		
+		<tr>
+			<th>Utilidad $ dsp 5%</th>
+			<td> <%= !today_prices.empty? ? number_with_delimiter(((today_prices.max*0.95 - today_prices.min)).round(0), delimiter: ",") : 0 %></td>
+			<td> <%= !yesterday_prices.empty? ? number_with_delimiter(((yesterday_prices.max*0.95 - yesterday_prices.min)).round(0), delimiter: ",") : 0 %></td>
+			<td> <%= !last_2d_prices.empty? ? number_with_delimiter(((last_2d_prices.max*0.95 - last_2d_prices.min)).round(0), delimiter: ",") : 0 %></td>
+			<td> <%= !last_3d_prices.empty? ? number_with_delimiter(((last_3d_prices.max*0.95 - last_3d_prices.min)).round(0), delimiter: ",") : 0 %></td>
+			<td> <%= !last_week_prices.empty? ? number_with_delimiter(((last_week_prices.max*0.95 - last_week_prices.min)).round(0), delimiter: ",") : 0 %></td>
+			<td> <%= !last_month_prices.empty? ? number_with_delimiter(((last_month_prices.max*0.95 - last_month_prices.min)).round(0), delimiter: ",") : 0 %></td>
+			<td> <%= !historic_prices.empty? ? number_with_delimiter(((historic_prices.max*0.95 - historic_prices.min)).round(0), delimiter: ",") : 0 %></td>
+
+		</tr>
+
+		<tr>
+			<th>Utilidad % dsp 5%</th>
+			<td> <%= !today_prices.empty? ? "#{(((today_prices.max*0.95 / today_prices.min)-1)*100).round(2)}%" : 0 %></td>
+			<td> <%= !yesterday_prices.empty? ? "#{(((yesterday_prices.max*0.95 / yesterday_prices.min)-1)*100).round(2)}%" : 0 %></td>
+			<td> <%= !last_2d_prices.empty? ? "#{(((last_2d_prices.max*0.95 / last_2d_prices.min)-1)*100).round(2)}%" : 0 %></td>
+			<td> <%= !last_3d_prices.empty? ? "#{(((last_3d_prices.max*0.95 / last_3d_prices.min)-1)*100).round(2)}%" : 0 %></td>
+			<td> <%= !last_week_prices.empty? ? "#{(((last_week_prices.max*0.95 / last_week_prices.min)-1)*100).round(2)}%" : 0 %></td>
+			<td> <%= !last_month_prices.empty? ? "#{(((last_month_prices.max*0.95 / last_month_prices.min)-1)*100).round(2)}%" : 0 %></td>
+			<td> <%= !historic_prices.empty? ? "#{(((historic_prices.max*0.95 / historic_prices.min)-1)*100).round(2)}%" : 0 %></td>
+			
+		</tr>
+		<tr>
+			<th> Promedio </th>
+			<td> <%= number_with_delimiter(today_prices.extend(DescriptiveStatistics).mean.to_i, delimiter: ",") %></td>
+			<td> <%= number_with_delimiter(yesterday_prices.extend(DescriptiveStatistics).mean.to_i, delimiter: ",") %></td>
+			<td> <%= number_with_delimiter(last_2d_prices.extend(DescriptiveStatistics).mean.to_i, delimiter: ",") %></td>
+			<td> <%= number_with_delimiter(last_3d_prices.extend(DescriptiveStatistics).mean.to_i, delimiter: ",") %></td>
+			<td> <%= number_with_delimiter(last_week_prices.extend(DescriptiveStatistics).mean.to_i, delimiter: ",") %></td>
+			<td> <%= number_with_delimiter(last_month_prices.extend(DescriptiveStatistics).mean.to_i, delimiter: ",") %></td>
+			<td> <%= number_with_delimiter(historic_prices.extend(DescriptiveStatistics).mean.to_i, delimiter: ",") %></td>
+		</tr>
+		<tr>
+			<th> Moda </th>
+			<td> <%= number_with_delimiter(today_prices.extend(DescriptiveStatistics).mode.to_i, delimiter: ",") %></td>
+			<td> <%= number_with_delimiter(yesterday_prices.extend(DescriptiveStatistics).mode.to_i, delimiter: ",") %></td>
+			<td> <%= number_with_delimiter(last_2d_prices.extend(DescriptiveStatistics).mode.to_i, delimiter: ",") %></td>
+			<td> <%= number_with_delimiter(last_3d_prices.extend(DescriptiveStatistics).mode.to_i, delimiter: ",") %></td>
+			<td> <%= number_with_delimiter(last_week_prices.extend(DescriptiveStatistics).mode.to_i, delimiter: ",") %></td>
+			<td> <%= number_with_delimiter(last_month_prices.extend(DescriptiveStatistics).mode.to_i, delimiter: ",") %></td>
+			<td> <%= number_with_delimiter(historic_prices.extend(DescriptiveStatistics).mode.to_i, delimiter: ",") %></td>
+			
+		</tr>
+
+	</tbody>
+</table>

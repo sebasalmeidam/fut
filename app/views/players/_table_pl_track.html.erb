@@ -1,0 +1,94 @@
+<table class="table table-condensed">
+	<thead>
+		<tr>
+			<th class="text-center">Jugador</th>
+			<th class="text-center">Nombre</th>
+			<th class="text-center">Tipo</th>
+			<th class="text-center">Precio Actual</th>
+			<th class="text-center">Comprar max:</th>
+			<th class="text-center">Vender min:</th>
+			<th class="text-center">Seguir / Guardar:</th>
+			<th class="text-center">Comprado?</th>
+			<th class="text-center">Recibir mail:</th>
+			<th class="text-center">Acciones</th>
+		</tr>
+	</thead>
+	<tbody>
+	<% players.each do |pl| %>
+		<tr class="<%= 'buy' if pl.current <= pl.buy %> <%= 'sell' if pl.current >= pl.sell %>">
+			<td> 
+				<%= link_to player_path(pl) do %>
+					<%= image_tag pl.img, height: "64", class: "img-circle" if pl.img %>
+				<% end %>
+			</td>	
+			<td><%= link_to "#{pl.player}", player_path(pl) %></td>	
+			<td><%= pl.tp if pl.tp %></td>	
+			<td class="text-right <%= 'buyText' if pl.current <= pl.buy %> <%= 'sellText' if pl.current >= pl.sell %>"><span class="numberCell"><%= number_with_delimiter(pl.current.to_i) %></span></td>	
+			<td class="text-right <%= 'buyText' if pl.current <= pl.buy %>"><span class="numberCell"><%= number_with_delimiter(pl.buy.to_i) %></span></td>
+			<td class="text-right <%= 'sellText' if pl.current >= pl.sell %>"><span class="numberCell"><%= number_with_delimiter(pl.sell.to_i) %></span></td>
+			<td class="text-center">
+				<% if pl.track? %>
+					Si <%= link_to edit_track_player_path(pl), class: "btn btn-danger btn-xs" do %>
+						<span>guardar</span>
+					<% end %>
+				<% else %>
+					No <%= link_to edit_track_player_path(pl), class: "btn btn-success btn-xs" do %>
+						<span>seguir</span>
+					<% end %>
+				<% end %>
+			</td>
+			<td class="text-center">
+				<% if pl.buyed? %>
+					Si <%= link_to edit_buyed_player_path(pl), class: "btn btn-danger btn-xs" do %>
+						<span>descartar</span>
+					<% end %>
+				<% else %>
+					No <%= link_to edit_buyed_player_path(pl), class: "btn btn-success btn-xs" do %>
+						<span>comprar</span>
+					<% end %>
+				<% end %>
+			</td>
+			<td class="text-center">
+				<% if pl.mail? %>
+					Si <%= link_to "modificar", edit_mail_user_player_url(pl.user_id, pl.id), class: "btn btn-warning btn-xs" %>
+				<% else %>
+					No <%= link_to "modificar", edit_mail_user_player_url(pl.user_id, pl.id), class: "btn btn-warning btn-xs" %>
+				<% end %>
+			</td>
+			
+			<td class="text-center">
+				<%= link_to "editar", edit_player_path(pl), class: "btn btn-primary btn-xs" %>
+				<%= link_to "eliminar", player_path(pl), method: :delete, data: {confirm: "Estas seguro que quieres eliminar?"}, class: "btn btn-danger btn-xs" %>
+				</td>
+		</tr>
+	<% end %>
+		<tr>
+			<td  colspan="10"></td>
+		</tr>
+		<tr>
+			<th>Total</th>
+			<td></td>
+			<td></td>
+			<td class="text-right">
+				<span class="numberCell"><%= number_with_delimiter(players.collect(&:current).map(&:to_f).reduce(:+).to_i) %> </span>
+			</td>
+			<td class="text-right">
+				<span class="numberCell"><%= number_with_delimiter(players.collect(&:buy).map(&:to_f).reduce(:+).to_i) %> </span>
+			</td>
+			<td class="text-right">
+				<span class="numberCell"><%= number_with_delimiter(players.collect(&:sell).map(&:to_f).reduce(:+).to_i) %> </span>
+			</td>
+		</tr>
+		<tr>
+			<td  colspan="10"></td>
+		</tr>
+		<tr>
+			<th>Por Comprar</th>
+			<td></td>
+			<td></td>
+			<td class="text-right"><span class="numberCell"><%= number_with_delimiter(players.where(buyed: false).collect(&:current).map(&:to_f).reduce(:+).to_i) %>  </span>	 </td>
+			<td class="text-right"><span class="numberCell"> <%= number_with_delimiter(players.where(buyed: false).collect(&:buy).map(&:to_f).reduce(:+).to_i) %> </span>	 </td>
+			<td class="text-right"><span class="numberCell"> <%= number_with_delimiter(players.where(buyed: false).collect(&:sell).map(&:to_f).reduce(:+).to_i) %> </span>	 </td>
+		</tr>
+	</tbody>
+</table>

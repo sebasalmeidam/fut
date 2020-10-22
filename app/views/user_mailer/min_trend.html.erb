@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Tendencia a la baja de: <%= @player.player %></h1>
+    <p>
+      <b>Precio Actual: </b><%= number_with_delimiter(@player.current) %> 
+      Se ha actualizado el precio de venta a: <%= number_with_delimiter(@player.sell.to_i, delimiter: ",") %> <br>
+      Y el precio de compra a: <%= number_with_delimiter(@player.buy.to_i, delimiter: ",") %> <br><br>
+
+      Se espera que el precio baje al menos 10% en la próxima hora hasta: 
+      <%= number_with_delimiter((@player.current * 0.87).to_i, delimiter: ",") %>. <br>
+      Si vende ahora y compra en una hora, esto podría generar una ganancia de: 
+      <%= number_with_delimiter(((@player.sell*0.95) - @player.buy).to_i, delimiter: ",")  %>
+    </p>
+    
+  </body>
+</html>

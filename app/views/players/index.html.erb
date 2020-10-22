@@ -1,0 +1,31 @@
+<div class="row">
+	<h1 align="center">
+		Lista de Jugadores
+		<%= link_to "Actualizar Precios", prices_path, class: "btn btn-primary btn-xs" %>
+		<%= link_to "Agregar jugador", new_player_path, class: "btn btn-default btn-xs" %>
+		
+	</h1>
+</div>
+
+<div class="row text-center">
+	<div class="col-xs-6 col-xs-offset-3 text-center">
+			
+			<%= form_tag list_path, method: 'get' do %>
+				<div class="input-group">
+					<%= text_field_tag :search, params[:search], placeholder: "Buscar Jugador", class: "form-control"  %>
+					<span class="input-group-btn">
+			    	<%= submit_tag "Buscar", class: "btn btn-default " %>	
+			    </span>
+				</div>
+			<% end %>
+
+	</div>
+</div>
+
+<h3>Jugadores a Seguir</h3>
+
+<%= render 'players/table_pl_track', players: @players.where(track: true) %>
+
+<h3>Jugadores a Guardados</h3>
+
+<%= render 'players/table_pl_track', players: @players.where(track: false) %>

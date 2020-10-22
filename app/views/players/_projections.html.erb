@@ -1,0 +1,43 @@
+<table class="table table-condensed">
+	<thead>
+		<tr>
+			<th>Tiempo / Datos hace:</th>
+			<th>1 Hora</th>
+			<th>3 Horas</th>
+			<th>6 Horas</th>
+			<th>9 Horas</th>
+			<th>12 Horas</th>
+			<th>15 Horas</th>
+			<th>18 Horas</th>
+			<th>21 Horas</th>
+
+			<th>1 Día</th>
+			<th>2 Días</th>
+			<th>3 Días</th>
+			<th>5 Días</th>			
+			<th>1 Semana</th>
+			
+
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<th>A una hora:</th>
+			<% project = [last_hours_projection(1,60), last_hours_projection(3,60), last_hours_projection(6,60), last_hours_projection(9,60), last_hours_projection(12,60), last_hours_projection(15,60), last_hours_projection(18,60), last_hours_projection(21,60), last_hours_projection(24,60), last_hours_projection(48,60), last_hours_projection(72,60), last_hours_projection(120,60), last_hours_projection(168,60) ] %>
+			<% project.each do |pr| %>
+				<td><%= number_with_delimiter(pr) %> </td>
+			<% end %>
+		</tr>
+	</tbody>
+</table>
+
+<div class="count">
+	
+	<% menores = project.select{|e| e.to_i < @player.current} %>
+	<% mayores = project.select{|e| e.to_i > @player.current} %>
+	<% iguales = project.select{|e| e.to_i == @player.current} %>
+	
+	Menores: <%= menores.count %> || Promedio: <%= menores.extend(DescriptiveStatistics).median.to_i %> <br>
+	Mayores: <%= mayores.count %> || Promedio: <%= mayores.extend(DescriptiveStatistics).median.to_i %> <br>
+	Iguales: <%= iguales.count %> || Promedio: <%= iguales.extend(DescriptiveStatistics).median.to_i %> <br>
+</div>

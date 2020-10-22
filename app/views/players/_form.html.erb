@@ -1,0 +1,73 @@
+<%= form_for @player, html: {class: "form-horizontal"} do |f| %>
+	
+<%= f.hidden_field :user_id, value: current_user.id %>
+<div class="form-group">
+	<%= f.label :player, "Nombre:", class: "col-xs-2 control-label" %>
+	<div class="col-xs-9">
+		<%= f.text_field :player, value: (if @player.new_record? then params[:name] else @player.player end), class: "form-control" %>
+	</div>
+</div>
+
+<div class="form-group">
+	<%= f.label :tp, "Tipo:", class: "col-xs-2 control-label" %>
+	<div class="col-xs-9">
+		<%= f.text_field :tp, value: (if @player.new_record? then params[:tp] else @player.tp end), class: "form-control" %>
+	</div>
+</div>
+
+<% if params[:url] %>
+	<%= f.hidden_field :url, value: (if @player.new_record? then params[:url] else @player.url end), class: "form-control" %>
+<% else %>
+	<div class="form-group">
+		<%= f.label :url, "Dirección url:", class: "col-xs-2 control-label" %>
+		<div class="col-xs-9">
+			<%= f.text_field :url, value: (if @player.new_record? then params[:url] else @player.url end), class: "form-control" %>
+		</div>
+	</div>
+<% end %>
+
+<% if params[:img] %>
+	<%= f.hidden_field :img, value: (if @player.new_record? then params[:img] else @player.img end), class: "form-control" %>
+<% else %>
+	<div class="form-group">
+		<%= f.label :img, "URL imagen (src):", class: "col-xs-2 control-label" %>
+		<div class="col-xs-9">
+			<%= f.text_field :img, value: (if @player.new_record? then params[:url] else @player.img end), class: "form-control" %>
+		</div>
+	</div>
+<% end %>
+
+
+<div class="form-group">
+	<%= f.label :buy, "Comprar menor o igual a:", class: "col-xs-2 control-label" %>
+	<div class="col-xs-9">
+		<%= f.text_field :buy,  value: (if @player.new_record? then "" else @player.buy.to_i end), data: {autonumeric: {mDec: 0}}, class: "form-control" %>
+	</div>
+</div>
+
+<div class="form-group">
+	<%= f.label :sell, "Vender mayor o igual a:", class: "col-xs-2 control-label" %>
+	<div class="col-xs-9">
+		<%= f.text_field :sell, value: (if @player.new_record? then "" else @player.sell.to_i end), data: {autonumeric: {mDec: 0}}, class: "form-control" %>
+	</div>
+</div>
+
+<div align="">
+  <label class="radio-inline" id="track">
+	  <%= f.check_box :track %>
+	  <span>Seguir?</span>
+  </label>
+</div>
+
+<div align="">
+  <label class="radio-inline" id="mail">
+	  <%= f.check_box :mail %>
+	  <span>Enviar mail?</span>
+  </label>
+</div>
+
+
+
+	<%= f.submit @player.new_record? ? "Crear" : "Editar" , :class => 'btn btn-default', id: "close-modal" %>
+	
+<% end %>

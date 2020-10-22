@@ -1,0 +1,82 @@
+<table class="table table-condensed">
+	<thead>
+		<tr>
+			<th>Hoy</th>
+			<th>Última Hora</th>
+			<th>Hace 2 horas</th>
+			<th>Hace 3 horas</th>
+			<th>Hace 6 horas</th>
+			<th>Hace 9 horas</th>
+			<th>Hace 12 horas</th>
+			<th>Hoy</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<th>Mínimo</th>
+			<td> <%= !last_hour_prices.empty? ? number_with_delimiter((last_hour_prices.min).round(0), delimiter: ",") : 0 %></td>
+			<td> <%= !last_2h_prices.empty? ? number_with_delimiter((last_2h_prices.min).round(0), delimiter: ",") : 0 %></td>
+			<td> <%= !last_3h_prices.empty? ? number_with_delimiter((last_3h_prices.min).round(0), delimiter: ",") : 0 %></td>
+			<td> <%= !last_6h_prices.empty? ? number_with_delimiter((last_6h_prices.min).round(0), delimiter: ",") : 0 %></td>
+			<td> <%= !last_9h_prices.empty? ? number_with_delimiter((last_9h_prices.min).round(0), delimiter: ",") : 0 %></td>
+			<td> <%= !last_12h_prices.empty? ? number_with_delimiter((last_12h_prices.min).round(0), delimiter: ",") : 0 %></td>
+			<td> <%= !today_prices.empty? ? number_with_delimiter((today_prices.min).round(0), delimiter: ",") : 0 %></td>
+		</tr>
+		<tr>
+			<th>Máximo</th>
+			<td> <%= !last_hour_prices.empty? ? number_with_delimiter((last_hour_prices.max).round(0), delimiter: ",") : 0 %></td>
+			<td> <%= !last_2h_prices.empty? ? number_with_delimiter((last_2h_prices.max).round(0), delimiter: ",") : 0 %></td>
+			<td> <%= !last_3h_prices.empty? ? number_with_delimiter((last_3h_prices.max).round(0), delimiter: ",") : 0 %></td>
+			<td> <%= !last_6h_prices.empty? ? number_with_delimiter((last_6h_prices.max).round(0), delimiter: ",") : 0 %></td>
+			<td> <%= !last_9h_prices.empty? ? number_with_delimiter((last_9h_prices.max).round(0), delimiter: ",") : 0 %></td>
+			<td> <%= !last_12h_prices.empty? ? number_with_delimiter((last_12h_prices.max).round(0), delimiter: ",") : 0 %></td>
+			<td> <%= !today_prices.empty? ? number_with_delimiter((today_prices.max).round(0), delimiter: ",") : 0 %></td>
+		</tr>
+		
+		<tr>
+			<th>Utilidad $ dsp 5%</th>
+			<td> <%= !last_hour_prices.empty? ? number_with_delimiter(((last_hour_prices.max*0.95 - last_hour_prices.min)).round(0), delimiter: ",") : 0 %></td>
+			<td> <%= !last_2h_prices.empty? ? number_with_delimiter(((last_2h_prices.max*0.95 - last_2h_prices.min)).round(0), delimiter: ",") : 0 %></td>
+			<td> <%= !last_3h_prices.empty? ? number_with_delimiter(((last_3h_prices.max*0.95 - last_3h_prices.min)).round(0), delimiter: ",") : 0 %></td>
+			<td> <%= !last_6h_prices.empty? ? number_with_delimiter(((last_6h_prices.max*0.95 - last_6h_prices.min)).round(0), delimiter: ",") : 0 %></td>
+			<td> <%= !last_9h_prices.empty? ? number_with_delimiter(((last_9h_prices.max*0.95 - last_12h_prices.min)).round(0), delimiter: ",") : 0 %></td>
+			<td> <%= !last_12h_prices.empty? ? number_with_delimiter(((last_12h_prices.max*0.95 - last_12h_prices.min)).round(0), delimiter: ",") : 0 %></td>
+			<td> <%= !today_prices.empty? ? number_with_delimiter(((today_prices.max*0.95 - today_prices.min)).round(0), delimiter: ",") : 0 %></td>
+
+		</tr>
+
+		<tr>
+			<th>Utilidad % dsp 5%</th>
+			<td> <%= !last_hour_prices.empty? ? "#{(((last_hour_prices.max*0.95 / last_hour_prices.min)-1)*100).round(2)}%" : 0 %></td>
+			<td> <%= !last_2h_prices.empty? ? "#{(((last_2h_prices.max*0.95 / last_2h_prices.min)-1)*100).round(2)}%" : 0 %></td>
+			<td> <%= !last_3h_prices.empty? ? "#{(((last_3h_prices.max*0.95 / last_3h_prices.min)-1)*100).round(2)}%" : 0 %></td>
+			<td> <%= !last_6h_prices.empty? ? "#{(((last_6h_prices.max*0.95 / last_6h_prices.min)-1)*100).round(2)}%" : 0 %></td>
+			<td> <%= !last_9h_prices.empty? ? "#{(((last_9h_prices.max*0.95 / last_9h_prices.min)-1)*100).round(2)}%" : 0 %></td>
+			<td> <%= !last_12h_prices.empty? ? "#{(((last_12h_prices.max*0.95 / last_12h_prices.min)-1)*100).round(2)}%" : 0 %></td>
+			<td> <%= !today_prices.empty? ? "#{(((today_prices.max*0.95 / today_prices.min)-1)*100).round(2)}%" : 0 %></td>
+			
+		</tr>
+
+		<tr>
+			<th> Promedio </th>
+			<td> <%= number_with_delimiter(last_hour_prices.extend(DescriptiveStatistics).mean.to_i, delimiter: ",") %></td>
+			<td> <%= number_with_delimiter(last_2h_prices.extend(DescriptiveStatistics).mean.to_i, delimiter: ",") %></td>
+			<td> <%= number_with_delimiter(last_3h_prices.extend(DescriptiveStatistics).mean.to_i, delimiter: ",") %></td>
+			<td> <%= number_with_delimiter(last_6h_prices.extend(DescriptiveStatistics).mean.to_i, delimiter: ",") %></td>
+			<td> <%= number_with_delimiter(last_9h_prices.extend(DescriptiveStatistics).mean.to_i, delimiter: ",") %></td>
+			<td> <%= number_with_delimiter(last_12h_prices.extend(DescriptiveStatistics).mean.to_i, delimiter: ",") %></td>
+			<td> <%= number_with_delimiter(today_prices.extend(DescriptiveStatistics).mean.to_i, delimiter: ",") %></td>
+		</tr>
+		<tr>
+			<th> Moda </th>
+			<td> <%= number_with_delimiter(last_hour_prices.extend(DescriptiveStatistics).mode.to_i, delimiter: ",") %></td>
+			<td> <%= number_with_delimiter(last_2h_prices.extend(DescriptiveStatistics).mode.to_i, delimiter: ",") %></td>
+			<td> <%= number_with_delimiter(last_3h_prices.extend(DescriptiveStatistics).mode.to_i, delimiter: ",") %></td>
+			<td> <%= number_with_delimiter(last_6h_prices.extend(DescriptiveStatistics).mode.to_i, delimiter: ",") %></td>
+			<td> <%= number_with_delimiter(last_9h_prices.extend(DescriptiveStatistics).mode.to_i, delimiter: ",") %></td>
+			<td> <%= number_with_delimiter(last_12h_prices.extend(DescriptiveStatistics).mode.to_i, delimiter: ",") %></td>
+			<td> <%= number_with_delimiter(today_prices.extend(DescriptiveStatistics).mode.to_i, delimiter: ",") %></td>
+		</tr>
+
+	</tbody>
+</table>

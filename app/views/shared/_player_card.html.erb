@@ -1,0 +1,80 @@
+<div class="row imageAlign">
+	<div class="col-xs-5 imageInfo">
+		<div class="row rating <%= rating_color %>">
+			<%= @player.rating %>
+		</div>
+		<div class="row position <%= rating_color %>">
+			<%= @player.position %>
+		</div>
+		<div class="row club">
+			<%= image_tag(@player.club_img_large, size: '40x40') %>
+		</div>
+		<div class="row nation">
+			<%= image_tag(@player.nation_img_large, size: '') %>
+		</div>
+	</div>
+	<div class="col-xs-7 ">
+		<%= !@player.special_img_large.nil? ? image_tag(@player.special_img_large, class: 'playerImgSpecial') : image_tag(@player.headshot_img_large, class: 'playerImgHead' ) %>
+	</div>
+	<div class="col-xs-12 <%= name_color %> cardName">
+		<%= @player.player_name %>
+	</div>
+</div> <!-- player card images-->
+	
+<div class="row attributes <%= attr_color %>" > <!-- player letters -->
+	
+		<div class="col-xs-6 small">
+			<div class="row">
+				<div class="col-xs-6 attrLeftNum">
+					<%= @player.attr_1_val %>		
+				</div>
+				<div class="col-xs-6 attrLeftText">
+					<%= @player.attr_1_name %>		
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-6 attrLeftNum">
+					<%= @player.attr_2_val %>
+				</div>
+				<div class="col-xs-6 attrLeftText">
+					<%= @player.attr_2_name %>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-6 attrLeftNum">
+					<%= @player.attr_3_val %>
+				</div>
+				<div class="col-xs-6 attrLeftText">
+					<%= @player.attr_3_name %>
+				</div>
+			</div>
+			
+		</div>
+		<div class="col-xs-6 small">
+			<div class="row">
+				<div class="col-xs-5 attrRightNum">
+					<%= @player.attr_4_val %>
+				</div>
+				<div class="col-xs-6 attrRightText">
+					<%= @player.attr_4_name %>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-5 attrRightNum">
+					<%= @player.attr_5_val %>
+				</div>
+				<div class="col-xs-6 attrRightText">
+					<%= @player.attr_5_name %>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-5 attrRightNum">
+					<%= @player.attr_6_val %>
+				</div>
+				<div class="col-xs-6 attrRightText">
+					<%= @player.attr_6_name %>
+				</div>
+			</div>
+			
+		</div> <!-- attributes fonts -->
+</div> <!-- player letter container -->

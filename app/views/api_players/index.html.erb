@@ -1,0 +1,175 @@
+<h1 align="center" class="">Lista de jugadores</h1>
+
+<div class="row">
+	<%= form_tag fifa17_index_path, class: 'form-inline', id: "player_filter",  method: 'get' do %>
+			<%= hidden_field_tag :direction, params[:direction] if params[:direction] %>
+			<%= hidden_field_tag :column, params[:column] if params[:column] %>
+		
+		<div class="checkPanel col-xs-2">
+			<div>
+				<div class="form-group">
+					<%= label_tag :GK, 'GK:', class: '' %>
+					<%= check_box_tag 'filter[]', 'GK', (params[:filter].include?('GK') if params[:filter]), class: 'checkbox', id: 'GK' %>
+				</div>
+			</div>
+			<div>
+				<div class="form-group">
+					<%= label_tag :CB, 'CB:', class: '' %>
+					<%= check_box_tag 'filter[]', 'CB', (params[:filter].include?('CB') if params[:filter]), class: 'checkbox', id: 'CB' %>
+				</div>
+			</div>
+			<div>
+				<div class="form-group">
+					<%= label_tag :RB, 'RB:', class: '' %>
+					<%= check_box_tag 'filter[]', 'RB', (params[:filter].include?('RB') if params[:filter]), class: 'checkbox', id: 'RB' %>
+				</div>
+				<div class="form-group">
+					<%= label_tag :RWB, 'RWB:', class: '' %>
+					<%= check_box_tag 'filter[]', 'RWB', (params[:filter].include?('RWB') if params[:filter]), class: 'checkbox', id: 'RWB' %>
+				</div>
+			</div>
+			<div>
+				<div class="form-group">
+					<%= label_tag :LB, 'LB:', class: '' %>
+					<%= check_box_tag 'filter[]', 'LB', (params[:filter].include?('LB') if params[:filter]), class: 'checkbox', id: 'LB' %>
+				</div>
+				<div class="form-group">
+					<%= label_tag :LWB, 'LWB:', class: '' %>
+					<%= check_box_tag 'filter[]', 'LWB', (params[:filter].include?('LWB') if params[:filter]), class: 'checkbox', id: 'LWB' %>
+				</div>
+			</div>
+
+			<div>
+				<div class="form-group">
+					<%= label_tag :CDM, 'CDM:', class: '' %>
+					<%= check_box_tag 'filter[]', 'CDM', (params[:filter].include?('CDM') if params[:filter]), class: 'checkbox', id: 'CDM' %>
+				</div>
+				<div class="form-group">
+					<%= label_tag :CM, 'CM:', class: '' %>
+					<%= check_box_tag 'filter[]', 'CM', (params[:filter].include?('CM') if params[:filter]), class: 'checkbox', id: 'CM' %>
+				</div>
+				<div class="form-group">
+					<%= label_tag :CAM, 'CAM:', class: '' %>
+					<%= check_box_tag 'filter[]', 'CAM', (params[:filter].include?('CAM') if params[:filter]), class: 'checkbox', id: 'CAM' %>
+				</div>
+			</div>		
+
+			<div>
+				<div class="form-group">
+					<%= label_tag :LM, 'LM:', class: '' %>
+					<%= check_box_tag 'filter[]', 'LM', (params[:filter].include?('LM') if params[:filter]), class: 'checkbox', id: 'LM' %>
+				</div>
+				<div class="form-group">
+					<%= label_tag :LW, 'LW:', class: '' %>
+					<%= check_box_tag 'filter[]', 'LW', (params[:filter].include?('LW') if params[:filter]), class: 'checkbox', id: 'LW' %>
+				</div>
+				<div class="form-group">
+					<%= label_tag :LF, 'LF:', class: '' %>
+					<%= check_box_tag 'filter[]', 'LF', (params[:filter].include?('LF') if params[:filter]), class: 'checkbox', id: 'LF' %>
+				</div>
+			</div>
+			<div>
+				<div class="form-group">
+					<%= label_tag :RM, 'RM:', class: '' %>
+					<%= check_box_tag 'filter[]', 'RM', (params[:filter].include?('RM') if params[:filter]), class: 'checkbox', id: 'RM' %>
+				</div>
+				<div class="form-group">
+					<%= label_tag :RW, 'RW:', class: '' %>
+					<%= check_box_tag 'filter[]', 'RW', (params[:filter].include?('RW') if params[:filter]), class: 'checkbox', id: 'RW' %>
+				</div>
+				<div class="form-group">
+					<%= label_tag :RF, 'RF:', class: '' %>
+					<%= check_box_tag 'filter[]', 'RF', (params[:filter].include?('RF') if params[:filter]), class: 'checkbox', id: 'RF' %>
+				</div>
+			</div>
+			<div>
+				<div class="form-group">
+					<%= label_tag :CF, 'CF:', class: '' %>
+					<%= check_box_tag 'filter[]', 'CF', (params[:filter].include?('CF') if params[:filter]), class: 'checkbox', id: 'CF' %>
+				</div>
+				<div class="form-group">
+					<%= label_tag :ST, 'ST:', class: '' %>
+					<%= check_box_tag 'filter[]', 'ST', (params[:filter].include?('ST') if params[:filter]), class: 'checkbox', id: 'ST' %>
+				</div>
+			</div>
+		</div> <!-- Positions columns -->
+
+		<div class="col-xs-2" style="">
+			<div class="row filterCol">
+				
+				<div class="col-xs-12">
+					<%= label_tag :rating, "Rating: " %>
+				</div>
+				
+				<div class="row">	
+					<div class="col-xs-3 col-xs-offset-1">
+						<%= text_field_tag :rating_min, params[:rating_min], placeholder: 'min', class: 'inputFilter' %>
+					</div>
+					<div class="col-xs-3 col-xs-offset-1">
+						<%= text_field_tag :rating_max, params[:rating_max], placeholder: 'max', class: 'inputFilter' %>
+					</div>
+				</div>
+				
+			</div>
+		</div> <!-- Rating columns -->
+
+		<div class="col-xs-2 filterCol">
+			<%= label_tag :Nacionalidad, "Nacionalidad: " %>
+			
+			<% ApiPlayer.all.collect(&:nation).uniq.each do |nation| %>
+				<ul class="list-unstyled nations">
+					<li>
+						<%= check_box_tag 'nation[]', "#{nation}", (params[:nation].include?("#{nation}") if params[:nation]), class: 'checkbox', id: "#{nation}" %>
+						<%= label_tag "#{nation}", "#{nation}", class: '' %>
+					</li>
+				</ul>
+			<% end %>
+		</div> <!-- Nations columns -->
+		
+		<div class="col-xs-12">
+			<%= submit_tag "Filtrar", class: 'btn btn-xs btn-default' %>
+			<%= link_to "Borrar", fifa17_index_path, class: 'btn btn-xs btn-danger' %>
+		</div>
+	<% end %>
+</div>
+
+<div class="row">
+	<%= form_tag fifa17_index_path, class: 'form-inline', id: "player_sort",  method: 'get' do %>
+		<%= hidden_field_tag :position, params[:position] if params[:position] %>
+		<%= hidden_field_tag :rating_min, params[:rating_min] if params[:rating_min] %>
+		<%= hidden_field_tag :rating_max, params[:rating_max] if params[:rating_max] %>
+		<div class="inline-group">
+			<%= label_tag :column, 'Ordenar:', class: '' %>
+			<%= select_tag :column, options_for_select( sortable_columns ), class: 'form-control', prompt: 'Seleccionar', index: nil %>
+		</div>
+			<%= submit_tag "Ordenar", class: 'btn btn-xs btn-default' %>
+	<% end %>
+	<% if params[:column] %>
+		<p>
+			<b>Ordenado por: </b><%= params[:column] %>
+		</p>	
+	<% end %>
+	
+</div>
+
+<div class="row">
+	
+	<div class="", style="margin-top: 10px">
+		<%= form_tag fifa17_index_path, class: 'form-inline', id: "players_search",  method: 'get' do  %>
+		
+			<div class="input-group">
+				<%= text_field_tag :search, params[:search], placeholder: 'buscar', class: 'form-control' %>
+				<span class="input-group-addon"> <%= submit_tag "Search", name: nil %> </span>
+				
+			</div>
+			<div id="players_api">
+				<%= render 'api_players/api_players' %>
+			</div>
+		<% end %>
+		
+	</div>
+</div>
+
+
+	
+

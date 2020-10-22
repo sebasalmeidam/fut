@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Hora de vender jugador: <%= @player.player %></h1>
+    <p>
+      Se ha fijado el precio de venta en: <%= number_with_delimiter(@player.sell.to_i, delimiter: ",") %> <br>
+      y el precio ha subido hasta: <%= number_with_delimiter(@price.price.to_i, delimiter: ",") %>.
+    </p>
+    <p>Si no deseas recibir más este mail para este jugar <%= link_to "Clic aquí", edit_mail_user_player_url(@user.id, @player.id) %></p>    
+  </body>
+</html>

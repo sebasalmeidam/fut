@@ -1,0 +1,60 @@
+<h1 align="center">
+	Estadísticas
+	<%= link_to "Regresar", fifa17_index_path, class: 'btn btn-xs btn-primary' %>
+</h1>
+
+<div align="center">
+<%= form_tag fifa17_index_path, class: 'form-inline', id: "show_player_search",  method: 'get' do  %>
+		
+	<div class="input-group">
+		<%= text_field_tag :search, params[:search], placeholder: 'buscar', class: 'form-control' %>
+		<span class="input-group-addon"> <%= submit_tag "Search", name: nil %> </span>
+		
+	</div>
+</div>
+
+<% end %>
+
+<div class="row">
+	<div class="col-xs-7">
+		<div class="col-xs-4 cardContainer <%= if @player.color == '' then 'sbc_base' else @player.color end%>" style="background-color: ''">
+			<%= render 'shared/player_card' %>
+		</div>
+		<div class="col-xs-8" style="padding-left: 30px ">
+			<h3>Información General</h3>
+			<b>Nombres:</b> <%= @player.firstName %> <br>
+			<b>Apellidos:</b> <%= @player.lastName %> <br>
+			<b>Comunmente:</b> <%= @player.commonName.empty? ? @player.player_name : @player.commonName  %> <br>
+			<b>Equipo:</b> <%= @player.club %> <%= image_tag(@player.club_img_small) %> <br>
+			<b>Nacionalidad:</b> <%= @player.nation %> <%= image_tag(@player.nation_img_small) %> <br>
+			<b>Posición:</b> <%= @player.position %> <br>
+			<b>Skill Moves:</b> <% sk = @player.skillMoves %>
+				<% if sk.to_i > 1 %>
+					<% (1..sk.to_i).to_a.each do |i| %>
+						<%= content_tag(:span, '', class: "fa fa-star yellowShow #{i}" ) %>
+					<% end %>
+				<% else %>
+						<%= content_tag(:span, '', class: "fa fa-star yellowShow" ) %>
+				<% end %>
+			<br><b>Weak Foot:</b> <% wf = @player.weakFoot %>
+				<% if wf.to_i > 1 %>
+					<% (1..wf.to_i).to_a.each do |i| %>
+						<%= content_tag(:span, '', class: "fa fa-star yellowShow #{i}" ) %>
+					<% end %>
+				<% else %>
+						<%= content_tag(:span, '', class: "fa fa-star yellowShow" ) %>
+				<% end %>
+			<br><b>Pie Dominante: </b> <%= @player.foot %> <br>
+			<b>Altura: </b> <%= @player.height %> cms <br>
+			<b>Peso: </b> <%= @player.weight %> kg <br>
+			<b>Edad: </b> <%= @player.age %> <br>
+			<b>Traits: </b> <%= @player.traits %> <br>
+			<b>Especialidades: </b> <%= @player.specialities %>
+
+		</div>
+	</div> <!-- player card and general info -->
+	<div class="col-xs-5">
+		<h3>Estadísticas en Juego</h3>
+		<%= render 'api_players/player_stats' %>
+	</div>
+</div>

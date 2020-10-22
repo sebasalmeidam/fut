@@ -1,0 +1,112 @@
+<h1 align="center">
+	<%= @player.player %>
+	<%= link_to "Regresar", players_path, class: "btn btn-default btn-xs" %>	
+	<%= link_to "Editar", edit_player_path(@player), class: "btn btn-primary btn-xs" %>	
+	<%= link_to "Ver en futbin", @player.url, class: "btn btn-success btn-xs" %>
+</h1>
+
+<div class="row" align="center">
+	<%= image_tag @player.img, height: "96", class: "img-circle" if @player.img %>
+</div>
+
+<div id="playerInfo" align="center">
+	<%= render 'players/info' %>
+</div>
+
+<div class="projections">
+	<h2>Proyecciones</h2>
+	<%= render 'players/projections' %>		
+</div>
+
+<div class="row">
+	
+	<div class="col-xs-12">
+		<h2>
+			Transacciones
+			<span class= 'btn btn-xs btn-primary' id= "hideTrans">Ver/Ocultar</span>
+			<%= link_to "Agregar", new_player_sale_path(@player.id), {remote: true, 'data-toggle' => 'modal', 'data-target' => '#modal-window', class: "btn btn-success btn-xs modal_path"} %>
+		</h2>
+
+
+		<div id="tableView" style="display:none">
+			<div id="flash"></div>
+			<%= render 'sales/table' %>
+		</div>
+	</div>
+
+
+	<div class="col-xs-12">
+		<h2>Información:</h2>
+		
+		
+		<div id="historicTable">
+		<%= render 'players/today_table' %>
+		<%= render 'players/historic_table' %>
+		</div>
+
+		<div id="historicTable"></div>
+	</div>
+</div>
+
+<div class="row">
+<h3>Datos Históricos</h3>
+<%= link_to "Hoy", player_path(@player, date: 'today'), class: "btn btn-xs btn-primary" %>
+<%= link_to "Ayer", player_path(@player, date: 'yesterday' ), class: "btn btn-xs btn-primary" %>
+<%= link_to "Último mes", player_path(@player, date: 'last_month' ), class: "btn btn-xs btn-primary" %>
+<%= link_to "Todo", player_path(@player), class: "btn btn-xs btn-primary" %>
+	<%= area_chart search_period.group(:created_at).sum(:price), refresh: 300, 
+			library: {
+				chart: {zoomType: "x"}, 
+				rangeSelector: {
+					enabled: true,
+					buttons: [
+						{ text: 'Day'}
+					], 
+					buttonTheme: { width: 60 },
+					selected: 0
+				},
+				title: {text: 'Precios Históricos'} 
+			} %>
+	<%= "No se encontraron resultados" if search_period.count == 0 %>
+	
+	<!-- map{|f| {price: f.price, created_at: f.created_at}} -->
+</div>
+
+	<div id="modal-window" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content"></div>
+	  </div>
+	</div>
+
+
+<div class="pagination">
+	<%= will_paginate @prices, renderer: BootstrapPagination::Rails %>
+</div>
+
+<table class="table table-condensed">
+	<thead>
+		<tr>
+			<th>Precio histórico:</th>
+			<th>Actualización</th>
+		</tr>
+	</thead>
+	<tbody>
+	<% @prices.each do |pr| %>
+		<tr>
+			<td><%= number_with_delimiter(pr.price.to_i) %></td>
+			<td><%= pr.updated_at.in_time_zone(-5).strftime("%d-%m-%Y") %> | <%= time_ago_in_words(pr.updated_at) %> ago</td>
+		</tr>
+	<% end %>
+	</tbody>
+</table>
+
+<div class="pagination">
+	<%= will_paginate @prices, renderer: BootstrapPagination::Rails %>
+</div>
+
+<script>
+	$('#hideTrans').click(function () {
+		$('#tableView').toggle()
+	}
+	);
+</script>

@@ -1,0 +1,396 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+@import "bootstrap-sprockets";
+@import "bootstrap";
+@import "bootstrap-social";
+@import 'font-awesome';
+
+/* navbar */
+body {
+  padding-top: 70px;
+}
+
+@media (max-width: 979px) {
+  body {
+    padding-top: 70px;
+  }
+}
+
+
+/* Number cells */
+.numberCell {
+    padding-right: 30px;
+}
+
+/* Colors */
+.yellow {
+    color: gold;
+    font-size: 11px;
+}
+
+.yellowShow {
+    color: gold;
+    
+}
+
+/* index buy/sell colors */
+.buy {
+    background: rgba(0, 0, 255, 0.1);
+}
+
+.sell {
+    background: rgba(255, 0, 0, 0.1);
+}
+
+.buyText {
+    color: blue
+}
+
+.sellText {
+    color: red
+}
+
+/*flash*/
+.alert-error {
+    background-color: #f2dede;
+    border-color: #eed3d7;
+    color: #b94a48;
+    text-align: left;
+ }
+
+.alert-alert {
+    background-color: #f2dede;
+    border-color: #eed3d7;
+    color: #b94a48;
+    text-align: left;
+ }
+
+.alert-success {
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+    color: #468847;
+    text-align: left;
+ }
+
+.alert-notice {
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+    color: #468847;
+    text-align: left;
+ }
+
+ /* player images */
+
+.cardContainer {
+    height: 316px;
+    width: 202px;
+    color: white;
+    font-weight: 600;
+    line-height: 2rem;
+}
+
+/* Card types */
+.award_winner {
+    background: image-url('cards.png') 0 -0px;
+}
+
+.confederation_champions_motm {
+    background: image-url('cards.png') 0 -316px;
+}
+
+.fut_birthday {
+    background: image-url('cards.png') 0 -632px;
+}
+
+.gotm {
+    background: image-url('cards.png') 0 -2212px;
+}
+
+.halloween {
+    background: image-url('cards.png') 0 -2528px;
+}
+
+.imotm {
+    background: image-url('cards.png') 0 -2844px;
+}
+
+.motm {
+    background: image-url('cards.png') 0 -3160px;
+}
+
+.movember {
+    background: image-url('cards.png') 0 -3476px;
+}
+
+.ones_to_watch {
+    background: image-url('cards.png') 0 -3792px;
+}
+
+.purple {
+    background: image-url('cards.png') 0 -4424px;
+}
+
+.record_breaker {
+    background: image-url('cards.png') 0 -4740px;
+}
+
+.sbc_base {
+    background: image-url('cards.png') 0 -5056px;
+}
+
+.st_patricks {
+    background: image-url('cards.png') 0 -5372px;
+}
+
+.tots_bronze {
+    background: image-url('cards.png') 0 -6004px;
+}
+
+.tots_gold {
+    background: image-url('cards.png') 0 -6320px;
+}
+
+.tots_silver {
+    background: image-url('cards.png') 0 -6636px;
+}
+
+.totw_bronze {
+    background: image-url('cards.png') 0 -6952px;
+}
+
+.totw_gold {
+    background: image-url('cards.png') 0 -7268px;
+}
+
+.totw_silver {
+    background: image-url('cards.png') 0 -7584px;
+}
+
+.toty {
+    background: image-url('cards.png') 0 -7900px;
+    
+}
+
+.bronze {
+    background: image-url('normal_cards.png') 0 -0px;
+}
+
+.gold {
+    background: image-url('normal_cards.png') 0 -316px;
+}
+
+.legend {
+    background: image-url('normal_cards.png') 0 -632px;
+}
+
+.rare_bronze {
+    background: image-url('normal_cards.png') 0 -948px;
+}
+
+.rare_gold {
+    background: image-url('normal_cards.png') 0 -1264px;
+}
+
+.rare_silver {
+    background: image-url('normal_cards.png') 0 -1580px;
+}
+
+.silver {
+    background: image-url('normal_cards.png') 0 -2212px;
+}
+
+/* cards font colors */
+
+.cardName {
+    font-size: 1.9rem;
+    text-align: center;
+    margin-top: 8px;
+    text-indent: 0;
+    letter-spacing: -0.5px;
+    margin-left: -25px;
+    width: calc(100% + 52px); 
+}
+
+.colorNameWhite{
+    color: white;
+}
+
+.colorNamePurple{
+    color: #591b82;
+}
+
+.colorNameTotwGold{
+    color: #ffeb7e;
+}
+
+.colorNameTotwSilver{
+    color: #bdbdbd;
+}
+
+.colorNameTotwBronze{
+    color: #b78553;
+}
+
+.colorNameDefault {
+    color: black;
+}
+
+.colorNameLegend {
+    color: #6c4b17
+}
+
+.colorNameMovember {
+    color: #3c2313;
+}
+
+.colorNameStPatricks {
+    color: #218540;
+}
+
+.colorNameOTW {
+    color: #c7cfdb;
+}
+
+.colorNameHero {
+    color: #b187ff;
+}
+
+/* attributes font colors */
+
+.attributes{
+    font-size: 2rem;
+    margin-top: 10px;
+}
+
+.attrLeftNum{
+    padding-left: 30px;
+}
+
+.attrLeftText{
+    padding-left: 10px;
+    font-weight: 500
+}
+
+.attrRightNum{
+    padding-left: 10px;
+}
+
+.attrRightText {
+    padding-left: 0;
+    font-weight: 500
+}
+
+.attrNameOTW {
+    color: #999da3;
+}
+
+.attrNameCMOTM {
+    color: #003482;
+}
+
+.attrNameHero {
+    color: #b187ff;
+}
+
+.ratingNameMOTM {
+    color: #812a01;
+}
+
+/* rating and positions colors */
+
+.imageInfo {
+    padding-left: 42px;
+    font-size: 1rem;
+    text-align: center;
+}
+
+.rating {
+    font-size: 2.8rem;
+}
+
+.blackRating {
+    color: black;
+}
+
+.position {
+    font-size: 1.7rem;
+}
+
+.club {
+    line-height: 4.2rem;
+    margin-top: 2px;
+}
+.nation {
+    line-height: 3.2rem;
+}
+
+/* Card types details */
+
+.playerImgSpecial{
+    position: absolute;
+    right: 7px;
+    margin-top: 1px
+}
+
+.playerImgHead{
+    position: absolute;
+    right: 6px;
+    margin-top: -0px;
+}
+
+.imageAlign {
+    margin-top: 38px;
+    text-align: '';
+}
+
+/* Filters */
+
+.checkPanel{
+    background-color: #f5f5f5;
+    border: 1px solid gray;
+    min-width: 200px;
+    border-radius: 5px;
+    padding: 10px;
+    max-height: 250px
+
+}
+
+.inputFilter{
+    max-width: 45px;
+    border-radius: 3px;
+    border: 1px solid gray;
+    height: 30px;
+    padding: 5px;
+}
+.filterCol{
+    background-color: #f5f5f5;
+    border: 1px solid gray;
+    min-width: 100px;
+    border-radius: 5px;
+    padding: 10px;
+    max-height: 250px;
+    overflow: scroll;
+    overflow-x: hidden
+
+}
+
+.nations > li {
+    margin-bottom: -15px;
+}
+
+
+

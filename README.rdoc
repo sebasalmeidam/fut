@@ -1,0 +1,15 @@
+== README
+
+Recreational app for a "futbol" game, 2017 version, to track player prices.
+
+Functionalities:
+
+* Web Scrapping
+
+* Price Evolution
+
+* Price Notifications
+
+* API created for mobile app (view FUTAPI repo)
+
+Build with Rubo on Rails

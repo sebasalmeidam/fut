@@ -1,0 +1,89 @@
+class CreateApiPlayers < ActiveRecord::Migration
+  def change
+    create_table :api_players do |t|
+      t.string :player_name
+      t.string :commonName
+      t.string :firstName
+      t.string :lastName
+			t.string :quality
+			t.string :color
+			t.boolean :isGK, default: false
+			t.string :baseId
+			t.string :playerdb_id
+			t.string :rating
+			t.string :league
+			t.string :league_abbr
+			t.string :nation
+			t.string :nation_img_small
+			t.string :nation_img_large
+			t.string :club
+			t.string :club_img_small
+			t.string :club_img_large
+			t.string :headshot_img_small
+			t.string :headshot_img_large
+			t.string :special_img_small
+			t.string :special_img_large
+			t.string :position
+			t.string :height
+			t.string :weight
+			t.string :birthdate
+			t.string :age
+			t.string :acceleration
+			t.string :aggression
+			t.string :agility
+			t.string :balance
+			t.string :ballcontrol
+			t.string :foot
+			t.string :skillMoves
+			t.string :crossing
+			t.string :curve
+			t.string :dribbling
+			t.string :finishing
+			t.string :freekickaccuracy
+			t.string :gkdiving
+			t.string :gkhandling
+			t.string :gkkicking
+			t.string :gkpositioning
+			t.string :gkreflexes
+			t.string :headingaccuracy
+			t.string :interceptions
+			t.string :jumping
+			t.string :longpassing
+			t.string :longshots
+			t.string :marking
+			t.string :penalties
+			t.string :positioning
+			t.string :potential
+			t.string :reactions
+			t.string :shortpassing
+			t.string :shotpower
+			t.string :slidingtackle
+			t.string :sprintspeed
+			t.string :standingtackle
+			t.string :stamina
+			t.string :strength
+			t.string :vision
+			t.string :volleys
+			t.string :weakFoot
+			t.string :traits
+			t.string :specialities
+			t.string :atkWorkRate
+			t.string :defWorkRate
+			t.string :playerType
+			t.string :attr_1_name
+			t.string :attr_2_name
+			t.string :attr_3_name
+			t.string :attr_4_name
+			t.string :attr_5_name
+			t.string :attr_6_name
+			t.string :attr_1_val
+			t.string :attr_2_val
+			t.string :attr_3_val
+			t.string :attr_4_val
+			t.string :attr_5_val
+			t.string :attr_6_val
+
+      t.timestamps null: false
+    end
+  end
+end
